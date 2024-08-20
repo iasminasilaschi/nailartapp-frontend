@@ -8,7 +8,7 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch('http://localhost:5000/api/user/login', {
+        const response = await fetch('http://localhost:5100/api/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const LoginForm = () => {
             // Save the token in local storage or state for future authenticated requests
             localStorage.setItem('token', data.token);
         } else {
-            setMessage(`Error: ${data}`);
+            setMessage(`Error: ${data.message}`);
         }
     };
 

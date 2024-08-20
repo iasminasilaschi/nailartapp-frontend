@@ -26,7 +26,7 @@ const RegisterForm = () => {
             setMessage('Registration successful!');
         } else {
             console.error("Error occurred:", data); // Log the error
-            setMessage(`Error: ${data}`);
+            setMessage(`Error: ${data.message}`);
         }
     };
 
