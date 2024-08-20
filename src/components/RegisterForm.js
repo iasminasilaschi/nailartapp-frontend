@@ -9,24 +9,28 @@ const RegisterForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch('http://localhost:5100/api/user/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                Username: username,
-                Password: password,
-                Role: role
-            }),
-        });
+        try {
+            const response = await fetch('http://localhost:5100/api/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    role: role
+                }),
+            });
 
-        const data = await response.json();
-        if (response.ok) {
-            setMessage('Registration successful!');
-        } else {
-            console.error("Error occurred:", data); // Log the error
-            setMessage(`Error: ${data.message}`);
+            const data = await response.text();
+
+            if (response.ok) {
+                setMessage(`Success: ${data}`);
+            } else {
+                setMessage(`Error: ${data}`);
+            }
+        } catch (error) {
+            setMessage(`Error: ${error.message}`);
         }
     };
 

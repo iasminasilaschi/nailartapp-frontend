@@ -8,21 +8,29 @@ const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch('http://localhost:5100/api/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
+        try {
+            const response = await fetch('http://localhost:5100/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    username, 
+                    password 
+                }),
+            });
 
-        const data = await response.json();
-        if (response.ok) {
-            setMessage('Login successful!');
-            // Save the token in local storage or state for future authenticated requests
-            localStorage.setItem('token', data.token);
-        } else {
-            setMessage(`Error: ${data.message}`);
+            const data = await response.text();
+
+            if (response.ok) {
+                setMessage('Login successful!');
+                // Save the token in local storage or state for future authenticated requests
+                localStorage.setItem('token', data);
+            } else {
+                setMessage(`Error: ${data}`);
+            }
+        } catch (error) {
+            setMessage(`Error: ${error.message}`);
         }
     };
 
