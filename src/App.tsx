@@ -3,15 +3,14 @@ import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import './styles/App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
-      <div className="App">
-          <h1>Nail Art App</h1>
-          <RegisterForm />
-          <LoginForm />
-      </div>
+    <div className="App">
+      <h1>Nail Art App</h1>
+      <RegisterForm />
+      <LoginForm />
+    </div>
   );
 }
-
 
 export default App;

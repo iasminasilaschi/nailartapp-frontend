@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "lib": ["dom", "dom.iterable", "esnext"],            /* Include standard library declarations and the DOM for the browser environment. */
+    "jsx": "react-jsx",                                  /* Use the new JSX transform in React 17+ which doesn't require React to be imported in every file. */
+    
+    /* Modules */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "moduleResolution": "node",                          /* Set module resolution strategy to 'node'. */
+    "baseUrl": "./src",                                  /* Base directory to resolve non-relative module names, useful for absolute imports. */
+    "paths": {
+      "@components/*": ["components/*"],                 /* Create paths alias for 'components' folder. */
+      "@pages/*": ["pages/*"],                           /* Create paths alias for 'pages' folder. */
+      "@styles/*": ["styles/*"]                          /* Create paths alias for 'styles' folder. */
+    },
+    
+    /* JavaScript Support */
+    "allowJs": true,                                     /* Allow JavaScript files to be part of your project. Useful for gradual migration. */
+    "checkJs": false,                                    /* Disable type-checking in JavaScript files. */
+
+    /* Emit */
+    "declaration": true,                                 /* Generate .d.ts files alongside the emitted JavaScript files. */
+    "sourceMap": true,                                   /* Generate source maps for easier debugging. */
+    "outDir": "./dist",                                  /* Specify the output directory for compiled files. */
+    "removeComments": true,                              /* Remove comments from the emitted JavaScript code. */
+    
+    /* Interop Constraints */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "noImplicitAny": true,                               /* Raise an error for variables that don't have an explicit type. */
+    "strictNullChecks": true,                            /* Raise an error when null or undefined is assigned to a variable. */
+    "strictFunctionTypes": true,                         /* Ensure parameters and return values are subtype-compatible. */
+    "noImplicitReturns": true,                           /* Raise an error if a function doesn't return a value in all code paths. */
+    "noUnusedLocals": true,                              /* Report errors for unused local variables. */
+    "noUnusedParameters": true,                          /* Report errors for unused parameters. */
+    "skipLibCheck": true                                 /* Skip type checking for declaration files (.d.ts) to speed up the build process. */
+  },
+  "include": ["src"],                                    /* Include all files in the src directory in the compilation. */
+  "exclude": ["node_modules", "dist"]                    /* Exclude node_modules and dist directories from the compilation. */
+}

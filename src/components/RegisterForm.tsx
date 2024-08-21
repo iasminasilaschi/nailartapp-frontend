@@ -1,36 +1,29 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const RegisterForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('client');
-    const [message, setMessage] = useState('');
+const RegisterForm: React.FC = () => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [role, setRole] = useState<string>('client');
+    const [message, setMessage] = useState<string>('');
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5100/api/user/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password,
-                    role: role
-                }),
+            const response = await axios.post('http://localhost:5100/api/user/register', {
+                username: username,
+                password: password,
+                role: role
             });
 
-            const data = await response.text();
-
-            if (response.ok) {
-                setMessage(`Success: ${data}`);
+            setMessage(`Success: ${response.data}`);
+        } catch (error: any) {
+            if (error.response) {
+                setMessage(`Error: ${error.response.data}`);
             } else {
-                setMessage(`Error: ${data}`);
+                setMessage(`Error: ${error.message}`);
             }
-        } catch (error) {
-            setMessage(`Error: ${error.message}`);
         }
     };
 

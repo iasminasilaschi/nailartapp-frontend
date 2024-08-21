@@ -1,36 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
+import axios from 'axios';
 
-const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+const LoginForm: React.FC = () => {
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [message, setMessage] = useState<string>('');
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5100/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ 
-                    username, 
-                    password 
-                }),
+            const response = await axios.post('http://localhost:5100/api/user/login', {
+                username, 
+                password 
             });
 
-            const data = await response.text();
-
-            if (response.ok) {
+            if (response.status === 200) {
                 setMessage('Login successful!');
-                // Save the token in local storage or state for future authenticated requests
-                localStorage.setItem('token', data);
+                // Save the token in local storage for future authenticated requests
+                localStorage.setItem('token', response.data);
             } else {
-                setMessage(`Error: ${data}`);
+                setMessage(`Error: ${response.data}`);
             }
-        } catch (error) {
-            setMessage(`Error: ${error.message}`);
+        } catch (error: any) {
+            setMessage(`Error: ${error.response?.data || error.message}`);
         }
     };
 
